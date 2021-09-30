@@ -1,5 +1,5 @@
 .list {
-  width: 200px;
+  width: 240px;
   text-align: left;
   margin: 0 auto;
 }
@@ -8,6 +8,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 8px;
 }
 
 .description {

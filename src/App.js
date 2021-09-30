@@ -1,11 +1,10 @@
 import './App.css';
-// import React from "react";
 import React, { Component } from 'react';
 
-import Section from './components/section/Section';
-import FeedbackOptions from './components/feedbackOptions/FeedbackOptions';
-import Statistics from './components/statistics/Statistics';
-import Notification from './components/statistics/notification/Notification';
+import Section from './components/section';
+import FeedbackOptions from './components/feedbackOptions';
+import Statistics from './components/statistics';
+import Notification from './components/statistics/notification';
 
 class App extends Component {
   state = {
@@ -38,8 +37,18 @@ class App extends Component {
     return Math.ceil(positiveFeedbackPercentage);
   };
 
+  generateRandomColor() {
+    return (
+      '#' +
+      (Math.random().toString(16) + '000000').substring(2, 8).toUpperCase()
+    );
+  }
+
   render() {
     const total = this.countTotalFeedback();
+    const { good } = this.state;
+    const { neutral } = this.state;
+    const { bad } = this.state;
 
     return (
       <div className="App">
@@ -55,11 +64,12 @@ class App extends Component {
         ) : (
           <Section title="Statistics">
             <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={total}
               positivePercentage={this.countPositiveFeedbackPercentage()}
+              generateRandomColor={this.generateRandomColor}
             ></Statistics>
           </Section>
         )}

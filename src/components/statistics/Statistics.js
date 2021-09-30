@@ -1,38 +1,70 @@
 import s from '../statistics/Statistics.module.css';
 import PropTypes from 'prop-types';
-import TotalSmile from './TotalSmile';
 
-const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
+import { GiCoffeeCup } from 'react-icons/gi';
+import { BiUpsideDown } from 'react-icons/bi';
+import { BiSmile } from 'react-icons/bi';
+import { BiMehBlank } from 'react-icons/bi';
+
+const Statistics = ({
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage,
+  generateRandomColor,
+}) => {
+  const capsCoffee = Array.from({ length: total - 1 }).map((u, i) => i);
+
   return (
-    <div className={s.list}>
-      <p className={s.item}>
+    <ul className={s.list}>
+      <li className={s.item}>
         <span className={s.description}>Good:</span>
         <span>{good}</span>
-        <span>&#9989;</span>
-      </p>
-      <p className={s.item}>
+        <span>
+          <BiSmile color="green" size="24px" />
+        </span>
+      </li>
+
+      <li className={s.item}>
         <span className={s.description}>Neutral:</span>
         <span>{neutral}</span>
-        <span>&#128528;</span>
-      </p>
-      <p className={s.item}>
+        <span>
+          <BiMehBlank color="grey" size="24px" />
+        </span>
+      </li>
+
+      <li className={s.item}>
         <span className={s.description}>Bad:</span>
         <span>{bad}</span>
-        <span>&#9940;</span>
-      </p>
-      <p className={s.item}>
+        <span>
+          <BiUpsideDown color="red" size="24px" />
+        </span>
+      </li>
+
+      <li className={s.item}>
         <span className={s.description}>Total:</span>
         <span>{total}</span>
-        <span>&#9749;</span>
-      </p>
+        <GiCoffeeCup color="green" size="24px" />
+      </li>
 
-      <TotalSmile total={total} smile="&#9749;"></TotalSmile>
+      <li className={s.item}>
+        {capsCoffee.map(cap => (
+          <span className={s.capsContainer} key={cap}>
+            <GiCoffeeCup
+              color={generateRandomColor()}
+              size="30px"
+              margin-right="2px"
+            />
+          </span>
+        ))}
+      </li>
 
-      <p className={s.item}>
+      <li className={s.item}>
         <span>Positive feedback:</span>
         <span>{positivePercentage} %</span>
-      </p>
-    </div>
+      </li>
+    </ul>
   );
 };
 Statistics.propTypes = {
