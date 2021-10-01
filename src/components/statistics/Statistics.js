@@ -1,28 +1,19 @@
-import s from '../statistics/Statistics.module.css';
 import PropTypes from 'prop-types';
+import s from '../statistics/Statistics.module.css';
+
+import CapsCoffeeTotal from './capsCoffeeTotal/capsCoffeeTotal';
 
 import { GiCoffeeCup } from 'react-icons/gi';
-import { BiUpsideDown } from 'react-icons/bi';
-import { BiSmile } from 'react-icons/bi';
-import { BiMehBlank } from 'react-icons/bi';
+import { FiCheckCircle } from 'react-icons/fi';
 
-const Statistics = ({
-  good,
-  neutral,
-  bad,
-  total,
-  positivePercentage,
-  generateRandomColor,
-}) => {
-  const capsCoffee = Array.from({ length: total - 1 }).map((u, i) => i);
-
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
     <ul className={s.list}>
       <li className={s.item}>
         <span className={s.description}>Good:</span>
         <span>{good}</span>
         <span>
-          <BiSmile color="green" size="24px" />
+          <FiCheckCircle color="green" size="24px" />
         </span>
       </li>
 
@@ -30,7 +21,7 @@ const Statistics = ({
         <span className={s.description}>Neutral:</span>
         <span>{neutral}</span>
         <span>
-          <BiMehBlank color="grey" size="24px" />
+          <FiCheckCircle color="grey" size="24px" />
         </span>
       </li>
 
@@ -38,7 +29,7 @@ const Statistics = ({
         <span className={s.description}>Bad:</span>
         <span>{bad}</span>
         <span>
-          <BiUpsideDown color="red" size="24px" />
+          <FiCheckCircle color="red" size="24px" />
         </span>
       </li>
 
@@ -48,16 +39,8 @@ const Statistics = ({
         <GiCoffeeCup color="green" size="24px" />
       </li>
 
-      <li className={s.item}>
-        {capsCoffee.map(cap => (
-          <span className={s.capsContainer} key={cap}>
-            <GiCoffeeCup
-              color={generateRandomColor()}
-              size="30px"
-              margin-right="2px"
-            />
-          </span>
-        ))}
+      <li className={s.itemCapsTotal}>
+        <CapsCoffeeTotal total={total}></CapsCoffeeTotal>
       </li>
 
       <li className={s.item}>

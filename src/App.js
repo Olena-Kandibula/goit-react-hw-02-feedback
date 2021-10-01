@@ -37,13 +37,6 @@ class App extends Component {
     return Math.ceil(positiveFeedbackPercentage);
   };
 
-  generateRandomColor() {
-    return (
-      '#' +
-      (Math.random().toString(16) + '000000').substring(2, 8).toUpperCase()
-    );
-  }
-
   render() {
     const total = this.countTotalFeedback();
     const { good } = this.state;
